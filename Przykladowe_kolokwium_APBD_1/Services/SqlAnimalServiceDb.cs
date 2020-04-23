@@ -27,18 +27,17 @@ namespace Przykladowe_kolokwium_APBD_1.Services
                 try
                 {
                     if (columnName == null) columnName = "AdmissionDate";
-
-                    com.CommandText = "SELECT Animal.Name, Animal.Type, Animal.AdmissionDate, Owner.FirstName  FROM Animal, Owner WHERE Animal.IdOwner = Owner.IdOwner ORDER BY @column";
-                    com.Parameters.AddWithValue("column", columnName);
+                    Console.WriteLine(columnName);
+                    com.CommandText = $"SELECT Animal.Name, Animal.Type, Animal.AdmissionDate, Owner.FirstName  FROM Animal, Owner WHERE Animal.IdOwner = Owner.IdOwner ORDER BY {columnName}";
                     var db = com.ExecuteReader();
                     while (db.Read())
                     {
                          animalResponses.Add(new AnimalResponse()
                          {
-                             Name = db["Animal.Name"].ToString(),
-                             AnimalType = db["Animal.Type"].ToString(),
-                             Date = DateTime.Parse(db["Animal.AdmissionDate"].ToString()),
-                             LastNameOfOwner = db["Owner.FirstName"].ToString()
+                             Name = db["Name"].ToString(),
+                             AnimalType = db["Type"].ToString(),
+                             Date = DateTime.Parse(db["AdmissionDate"].ToString()),
+                             LastNameOfOwner = db["FirstName"].ToString()
                          });
                     }
                     

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Przykladowe_kolokwium_APBD_1.DTOs.Request;
 using Przykladowe_kolokwium_APBD_1.Services;
 
@@ -10,15 +11,16 @@ namespace Przykladowe_kolokwium_APBD_1.Controllers
     {
         private readonly IServiceDb _serviceDb;
         
-        ClinicController(SqlAnimalServiceDb serviceDb)
+        public ClinicController(IServiceDb serviceDb)
         {
             _serviceDb = serviceDb;
         }
-
-        [HttpGet("{columnName}")]
-        public IActionResult getAnimals(string columnName)
+        
+        [HttpGet]
+        public IActionResult getAnimals(string sortBy)
         {
-            return _serviceDb.getAnimals(columnName);
+            Console.WriteLine("Lol");
+            return _serviceDb.getAnimals(sortBy);
         }
 
         [HttpPost]
